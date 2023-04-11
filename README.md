@@ -1,3 +1,3 @@
-## Spring Calendar
+## Meetups Calendar
 
-Release calendar for Spring projects
+Calendar for local meetup events
