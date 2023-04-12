@@ -28,7 +28,7 @@ import java.util.Date;
 import java.util.stream.StreamSupport;
 
 /**
- * Controller for exposing {@link Release Releases} as an iCalendar-format download.
+ * Controller for exposing {@link Event Events} as an iCalendar-format download.
  *
  * @author Andy Wilkinson
  */
@@ -43,7 +43,7 @@ class ICalController {
 	}
 
 	@RequestMapping(produces = "text/calendar")
-	String calendar() throws ParseException {
+	String calendar() {
 		ICalendar calendar = new ICalendar();
 		calendar.setExperimentalProperty("X-WR-CALNAME", "Events dates");
 		StreamSupport.stream(this.eventRepository.findAll().spliterator(), false).map(this::createEvent).forEach(calendar::addEvent);

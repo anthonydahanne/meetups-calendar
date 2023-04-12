@@ -30,13 +30,13 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 /**
- * Controller for exposing {@link Release Releases} as Full Calendar events.
+ * Controller for exposing {@link Event } as Full Calendar events.
  *
  * @author Andy Wilkinson
  * @author Brian Clozel
  */
 @RestController
-@RequestMapping("/releases")
+@RequestMapping("/calendar")
 class EventsController {
 
 	private final EventRepository eventRepository;

@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ovh.quebec.calendar.meetup.EventRepository;
 
@@ -16,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(SpringExtension.class)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CalendarControllersIT {
     @LocalServerPort
@@ -127,7 +129,7 @@ public class CalendarControllersIT {
 
     @Test
     @Order(3)
-    public void testPostEventAndThenRetrieveIcal() throws JSONException {
+    public void testPostEventAndThenRetrieveIcal() {
 
         String jsonToPost = """
                 {
