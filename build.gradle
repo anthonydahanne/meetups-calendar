@@ -30,7 +30,7 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 	implementation('org.springframework.boot:spring-boot-starter-data-rest')
 	implementation('org.springframework.boot:spring-boot-starter-validation')
-	implementation('org.xerial:sqlite-jdbc:3.41.2.1')
+	implementation('org.xerial:sqlite-jdbc:3.44.1.0')
 	implementation('org.hibernate.orm:hibernate-community-dialects')
 
 //	runtimeOnly(platform('com.azure.spring:spring-cloud-azure-dependencies:5.7.0'))
