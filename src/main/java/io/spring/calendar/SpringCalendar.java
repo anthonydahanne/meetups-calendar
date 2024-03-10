@@ -36,8 +36,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  *
  * @author Andy Wilkinson
  */
-@SpringBootApplication
-@EnableScheduling
+//@SpringBootApplication
+//@EnableScheduling
 public class SpringCalendar {
 
 	public static void main(String[] args) {
