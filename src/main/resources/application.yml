@@ -1,20 +1,31 @@
+hibernate:
+  hbm2ddl:
+    auto: create-drop
+  show_sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    enabled-by-default: true
+  endpoint:
+    health:
+      show-details: always
+    shutdown:
+      enabled: true
+    env:
+      show-values: ALWAYS
+
+server:
+  forward-headers-strategy: native
+
 spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
   jpa:
     hibernate:
-      ddl-auto: none
-
-calendar:
-  github:
-    username: ${calendar-github-username}
-    password: ${calendar-github-password}
-    organizations:
-      - micrometer-metrics
-      - r2dbc
-      - reactor
-      - spring-cloud
-      - spring-gradle-plugins
-      - spring-io
-      - spring-projects
-  release:
-    project_aliases:
-      'Toolsuite Distribution': STS
+      ddl-auto: create

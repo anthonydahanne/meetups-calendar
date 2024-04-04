@@ -1,3 +1,3 @@
 ## Meetups Calendar
 
-Calendar for local meetup events
+Calendar for developers meetups

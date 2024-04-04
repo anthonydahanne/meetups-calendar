@@ -3,14 +3,16 @@ plugins {
 	id 'java'
 	id 'io.spring.javaformat'
 	id 'org.springframework.boot'
+	id 'io.spring.dependency-management'
 }
 
 repositories {
 	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
 }
 
 base {
-	archivesName = 'spring-calendar'
+	archivesName = 'meetups-calendar'
 }
 
 java {
@@ -33,12 +35,15 @@ dependencies {
 	implementation('org.xerial:sqlite-jdbc:3.44.1.0')
 	implementation('org.hibernate.orm:hibernate-community-dialects')
 
-//	runtimeOnly(platform('com.azure.spring:spring-cloud-azure-dependencies:5.7.0'))
-//	runtimeOnly('com.azure.spring:spring-cloud-azure-starter-keyvault-secrets')
 
-	testImplementation('org.springframework.boot:spring-boot-starter-test')
-
+	runtimeOnly 'org.postgresql:postgresql'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:postgresql'
+	testImplementation 'io.rest-assured:rest-assured'
 	testRuntimeOnly('org.junit.platform:junit-platform-launcher')
+
+	developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 }
 
 checkstyle {
