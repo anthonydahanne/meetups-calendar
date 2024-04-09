@@ -1,0 +1,13 @@
+---
+applications:
+- name: meetups-calendar
+  memory: 2G
+  random-route: true
+  path: build/libs/meetups-calendar
+#  buildpack: java_buildpack_offline
+  env:
+#    BP_NATIVE_IMAGE: true
+#    CNB_PLATFORM_API: 0.12
+#    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
+#    SPRING_PROFILES_ACTIVE: http2
+    JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 17.+ } }'
