@@ -24,5 +24,4 @@ import org.springframework.data.repository.CrudRepository;
  * @author Andy Wilkinson
  */
 public interface EventRepository extends CrudRepository<Event, String> {
-//    Iterable<Event> findAllInPeriod(Date startDate, Date endDate);
 }
