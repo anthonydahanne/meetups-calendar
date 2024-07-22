@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package dev.meetups.meetup;
+package dev.meetups;
 
+import dev.meetups.model.Event;
 import org.springframework.data.repository.CrudRepository;
 
 /**

@@ -1,4 +1,4 @@
-package dev.meetups.meetup;
+package dev.meetups.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

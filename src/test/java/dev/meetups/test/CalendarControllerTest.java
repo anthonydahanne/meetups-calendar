@@ -13,8 +13,8 @@ import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
-import dev.meetups.meetup.Event;
-import dev.meetups.meetup.EventRepository;
+import dev.meetups.model.Event;
+import dev.meetups.EventRepository;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -27,7 +27,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.hasSize;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class EventsControllerTest {
+class CalendarControllerTest {
 
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
@@ -81,9 +81,9 @@ class EventsControllerTest {
 		given()
 				.contentType(ContentType.JSON)
 				.when()
-				.get("/events")
+				.get("/calendar?city=events&start=2024-01-30T00:00:00-04:00&end=2024-08-11T00:00:00-04:00")
 				.then()
 				.statusCode(200)
-				.body("_embedded.events", hasSize(1));
+				.body("", hasSize(1));
 	}
 }

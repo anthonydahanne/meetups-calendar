@@ -1,0 +1,37 @@
+package dev.meetups;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
+
+@Component
+public class StartUpAutoFill {
+
+	private static final Logger LOG = LoggerFactory.getLogger(CalendarApiApplication.class);
+	private final GroupsIds groupsIds;
+	EventRepository eventRepository;
+	private final FetchEvents fetchEvents;
+
+	@Value("${autofill}")
+	private Boolean autoFill;
+
+	public StartUpAutoFill(EventRepository eventRepository, FetchEvents fetchEvents, GroupsIds groupsIds) {
+		this.eventRepository = eventRepository;
+		this.fetchEvents = fetchEvents;
+		this.groupsIds = groupsIds;
+	}
+
+	@EventListener
+	public void handleContextRefresh(ContextRefreshedEvent event) {
+		if (eventRepository.count() > 0) {
+			LOG.info("Database already created; skipping init");
+		} else if (autoFill) {
+			LOG.info("Fetching past events and saving them in DB");
+			fetchEvents.retrieveAndSaveCncfPastEvents(groupsIds.cncf);
+			fetchEvents.retrieveAndSaveMeetupPastEvents(groupsIds.meetup);
+		}
+	}
+}

@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-package dev.meetups.meetup;
+package dev.meetups;
 
+import dev.meetups.model.Event;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import static dev.meetups.EventColoring.colorFromGroupName;
 
 /**
  * Controller for exposing {@link Event } as Full Calendar events.
@@ -38,33 +39,32 @@ import java.util.stream.StreamSupport;
  */
 @RestController
 @RequestMapping("/calendar")
-class EventsController {
+class CalendarController {
 
 	private final EventRepository eventRepository;
 
-	EventsController(EventRepository eventRepository) {
+	CalendarController(EventRepository eventRepository) {
 		this.eventRepository = eventRepository;
 	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	List<Map<String, Object>> releases(@RequestParam String start, @RequestParam String end) throws ParseException {
-//		Date startDate = new SimpleDateFormat("yyyy-MM-dd").parse(start);
-//		Date endDate = new SimpleDateFormat("yyyy-MM-dd").parse(end);
-		return StreamSupport.stream(this.eventRepository.findAll().spliterator(), false).map((release) -> {
-			Map<String, Object> event = new HashMap<>();
-			event.put("title", release.getGroupName() + " " + release.getName());
-			event.put("allDay", true);
-			event.put("start", release.getDateTime());
-			if (release.getUrl() != null) {
-				event.put("url", release.getUrl());
+	List<Map<String, Object>> releases(@RequestParam String start, @RequestParam String end, @RequestParam(name="city", required=false, defaultValue="montreal") String city) {
+		return StreamSupport.stream(this.eventRepository.findAll().spliterator(), false).map((event) -> {
+			Map<String, Object> formattedEvent = new HashMap<>();
+			formattedEvent.put("title", event.getGroupName() + " " + event.getName());
+			formattedEvent.put("allDay", true);
+			formattedEvent.put("start", event.getDateTime());
+			if (event.getUrl() != null) {
+				formattedEvent.put("url", event.getUrl());
 			}
-//			if (release.getStatus() == Status.CLOSED) {
-//				event.put("backgroundColor", "#6db33f");
+			formattedEvent.put("backgroundColor", colorFromGroupName(event.getGroupName()));
+//			if (event.getStatus() == Status.CLOSED) {
+//				formattedEvent.put("backgroundColor", "#6db33f");
 //			}
-//			else if (release.isOverdue()) {
-//				event.put("backgroundColor", "#d14");
+//			else if (event.isOverdue()) {
+//				formattedEvent.put("backgroundColor", "#d14");
 //			}
-			return event;
+			return formattedEvent;
 		}).collect(Collectors.toList());
 	}
 

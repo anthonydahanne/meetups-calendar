@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Local meetups to come in your city!</title>
+    <link rel="stylesheet" href="/styles/calendar.css" />
+
+    <script src='/webjars/fullcalendar/index.global.js'></script>
+    <script th:inline="javascript">
+        const city = [[${city}]];
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarDiv = document.getElementById('calendar');
+            const initialDate = new URLSearchParams(window.location.search).get('initialDate')
+            const calendar = new FullCalendar.Calendar(calendarDiv, {
+                initialView: 'dayGridMonth',
+                initialDate: initialDate,
+                headerToolbar: {
+                    left: 'today prev,next',
+                    center: 'title',
+                    right: 'dayGridMonth,listMonth'
+                },
+                buttonText: {
+                    today: 'Today',
+                    month: 'Grid',
+                    list: 'List'
+                },
+                allDayText: '',
+                height: 'auto'
+            });
+            calendar.addEventSource('/calendar?city=' + city);
+            calendar.render();
+        });
+    </script>
+</head>
+<body>
+<div id='calendar'></div>
+<div>
+    <p>
+        <a th:href="'ical?city=' + ${city}">iCal</a>
+</div>
+</body>
+</html>

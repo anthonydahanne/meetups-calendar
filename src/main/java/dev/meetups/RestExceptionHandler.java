@@ -1,4 +1,4 @@
-package dev.meetups.meetup;
+package dev.meetups;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -15,8 +15,6 @@ import java.util.stream.Collectors;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
-  
-   //other exception handlers
   
    @ExceptionHandler(ConstraintViolationException.class)
    protected ResponseEntity<JsonError> handleEntityNotFound(

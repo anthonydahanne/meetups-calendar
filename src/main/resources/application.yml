@@ -1,7 +1,9 @@
-hibernate:
-  hbm2ddl:
-    auto: create-drop
-  show_sql: true
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: debug
+
 
 management:
   endpoints:
@@ -12,20 +14,73 @@ management:
   endpoint:
     health:
       show-details: always
-    shutdown:
-      enabled: true
-    env:
-      show-values: ALWAYS
+#    shutdown:
+#      enabled: true
+#    env:
+#      show-values: ALWAYS
 
 server:
   forward-headers-strategy: native
 
 spring:
+#  autoconfigure:
+#    exclude:
+#      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+#      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  application:
+    name: meetups-calendar
   datasource:
     driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://host/mydb?user=username&password=password
   sql:
     init:
-      mode: always
+#      platform: none
+      continue-on-error: true
+  #      mode: always
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  jackson:
+    deserialization:
+      read-date-timestamps-as-nanoseconds: false
+  threads:
+    virtual:
+      enabled: true
+
+scheduler:
+  refreshRate: 10000
+
+autofill: false
+
+adminPassword: overridden
+
+groups:
+  cncf:
+    montreal:
+      - 180
+
+  meetup:
+    montreal:
+      - montreal-jug
+      - typescript-montreal
+      - fluttermontreal
+#      - lets-code-eat-and-have-fun
+#      - montreal-data-and-ai
+      - snowflake-montreal-user-group
+      - grafana-and-friends-montreal
+      - cybersecurite-securite-informatiques
+      - cppmtl
+      - montrealunitymeetup
+      - linux-montreal
+      - golangmontreal
+      - google-cloud-platform-meetup-montreal
+      - software-crafters-montreal
+      - Meetup-DevOps-Montreal
+      - linux-montreal
+      - Montreal-AWS-Users-United
+      - generative-ai-montreal
+      - montreal-python
+      - montrealrb
+      - js-montreal
+      - pydata-mtl

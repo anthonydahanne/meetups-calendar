@@ -15,6 +15,6 @@
  */
 
 /**
- * Classes for retrieving and serving event information.
+ * Classes for retrieving and serving meetup.com event information.
  */
 package dev.meetups.meetup;

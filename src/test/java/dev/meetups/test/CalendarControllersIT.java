@@ -14,7 +14,7 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
-import dev.meetups.meetup.EventRepository;
+import dev.meetups.EventRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -65,26 +65,10 @@ public class CalendarControllersIT {
         HttpEntity<String> entity = new HttpEntity<>(null, headers);
 
         ResponseEntity<String> response = restTemplate.exchange(
-                createURLWithPort("/events"),
+                createURLWithPort("/calendar?city=events&start=2024-01-30T00:00:00-04:00&end=2024-08-11T00:00:00-04:00"),
                 HttpMethod.GET, entity, String.class);
 
-        String expected = """
-                {
-                  "_embedded": {
-                    "events": [
-                    ]
-                  },
-                  "_links": {
-                    "self": {
-                      "href": "http://localhost:PORT/events"
-                    },
-                    "profile": {
-                      "href": "http://localhost:PORT/profile/events"
-                    }
-                  }
-                }
-
-                """.replaceAll("PORT", String.valueOf(port));
+        String expected = "[]";
 
         JSONAssert.assertEquals(expected, response.getBody(), false);
     }
@@ -114,39 +98,19 @@ public class CalendarControllersIT {
         headers.add(HttpHeaders.ACCEPT, "application/json");
         entity = new HttpEntity<>(jsonToPut, headers);
         response = restTemplate.exchange(
-                createURLWithPort("/events"),
+                createURLWithPort("/calendar?city=events&start=2024-01-30T00:00:00-04:00&end=2024-08-11T00:00:00-04:00"),
                 HttpMethod.GET, entity, String.class);
         String expected = """
-                {
-                  "_embedded": {
-                    "events": [
-                     {
-                            "groupName": "MontrealJUG",
-                            "name": "OpenRewrite: Where the code fixes itself (plus all the dependencies)",
-                            "url": "https://www.meetup.com/montreal-jug/events/292492289/",
-                            "dateTime": "2023-04-18T17:30:00",
-                            "_links": {
-                              "self": {
-                                "href": "http://localhost:PORT/events/1"
-                              },
-                              "event": {
-                                "href": "http://localhost:PORT/events/1"
-                              }
-                            }
-                          }
-                    ]
-                  },
-                  "_links": {
-                    "self": {
-                      "href": "http://localhost:PORT/events"
-                    },
-                    "profile": {
-                      "href": "http://localhost:PORT/profile/events"
-                    }
+                [
+                  {
+                    "allDay": true,
+                    "backgroundColor": "orangered",
+                    "start": "2023-04-18T17:30:00",
+                    "title": "MontrealJUG OpenRewrite: Where the code fixes itself (plus all the dependencies)",
+                    "url": "https://www.meetup.com/montreal-jug/events/292492289/"
                   }
-                }
-
-                """.replaceAll("PORT", String.valueOf(port));
+                ]
+                """;
 
         JSONAssert.assertEquals(expected, response.getBody(), false);
     }
@@ -180,15 +144,16 @@ public class CalendarControllersIT {
         String expected = """
                 BEGIN:VCALENDAR
                 VERSION:2.0
-                PRODID:-//Michael Angstadt//biweekly 0.6.7//EN
-                X-WR-CALNAME:Events dates
+                PRODID:-//Michael Angstadt//biweekly 0.6.8//EN
+                X-WR-CALNAME:Meetups Events dates for montreal
                 BEGIN:VEVENT
-                                
-                                
+
+
                 SUMMARY:MontrealJUG OpenRewrite: Where the code fixes itself (plus all the\s
                  dependencies)
-                 
-                 
+
+
+                COLOR:orangered
                 END:VEVENT
                 END:VCALENDAR
                 """;
