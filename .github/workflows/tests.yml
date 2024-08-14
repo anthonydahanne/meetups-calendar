@@ -39,6 +39,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: buildpacks/github-actions/setup-pack@v5.6.0
+      - uses: buildpacks/github-actions/setup-pack@v5.7.3
       - name: Build image with paketo
-        run: pack build meetups-calendar --env BP_JVM_VERSION=21 --builder paketobuildpacks/builder-jammy-full
+        run: pack build meetups-calendar --env BP_JVM_VERSION=21 --builder paketobuildpacks/builder-jammy-tiny
