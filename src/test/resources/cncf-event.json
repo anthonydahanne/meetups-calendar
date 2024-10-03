@@ -1,0 +1,16 @@
+{
+  "cohost_registration_url": "https://community.cncf.io/events/details/cncf-montreal-presents-kubernetes-birthday-party-montreal/",
+  "cropped_banner_url": "https://res.cloudinary.com/startup-grind/image/upload/c_scale,w_2560/c_crop,h_640,w_2560,y_1.0_mul_h_sub_1.0_mul_640/c_crop,h_640,w_2560/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-cncf/event_banners/party_KEmciQl.jpeg",
+  "cropped_picture_url": "https://res.cloudinary.com/startup-grind/image/upload/c_fill,w_500,h_500,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/v1/gcs/platform-data-cncf/events/k8s10.jpg",
+  "description": "<p>Déjà 10 ans de Kubernetes ! C'est le temps d'un party !</p><p>Pour cette occasion, moins de présentations et plus de discussions, plus de social, et une surprise spéciale pour les 10 ans de Kubenetes.</p><p>Un grand merci à Google Montreal de nous inviter dans leurs locaux!</p><p><br></p><p><b>PROGRAMME<br></b></p><p><b style=\"\">Watch Party&nbsp;</b><span style=\"\">-&nbsp;</span>Kubernetes: The Documentary<span style=\"\">&nbsp;</span></p><p><b>Tech Talk -&nbsp;</b><span style=\"\">The past, present, and future of Google Kubernetes Engine,&nbsp;&nbsp;</span><span style=\"\">Gari&nbsp;</span><span style=\"\">Singh, GKE&nbsp;</span><span style=\"\">Product Manager @Google Cloud</span></p><p><span style=\"\"><b>AMA</b> - Kubernetes and GKE&nbsp;</span></p><p><b>Lightning Talk</b> - TBD</p><p><br></p><p><b style=\"\">INFOS PRATIQUES</b><br></p><p>L'événement ouvre ses portes à 5.30PM et les présentations démarreront à 6.00PM.</p><p>Voici l'adresse: Google Montreal Office, 425 Avenue Viger Ouest, 11th floor, Montréal, Québec, H2Z 1E9</p><p>----</p><p>Kubernetes is turning 10! Join the party on June 12th at Google Montreal&nbsp;</p><p><br></p><p><b>SCHEDULE<span style=\"\"> <br></span></b></p><p><b>Watch Party </b>- Kubernetes: The Documentary </p><p><b>Tech Talk</b> - The past, present, and future of Google Kubernetes Engine,  Gari Singh, GKE Product Manager @Google Cloud</p><p><b>AMA </b>- Kubernetes and GKE&nbsp;</p><p><b>Lightning Talk - TBD</b></p><p><br></p><p><b>LOGISTICS</b></p><p>Doors are open at 5:30 pm, with the talks opening a little after 6 pm. Doors close at 9 pm.</p><p>Google Montreal hosts the event at their office at Google Montreal Office, 425 Avenue Viger Ouest, 11th floor, Montréal, Québec, H2Z 1E9</p><p><br></p>",
+  "description_short": "Déjà 10 ans de Kubernetes ! C'est le temps d'un party !\nVenez nous rejoindre pour ce CNCF & Kubernetes Meetup de Montreal, en plein centre ville chez Google Montreal\n",
+  "event_type_title": "Meetup",
+  "id": 9198,
+  "start_date": "2024-06-12T21:30:00Z",
+  "title": "⎈ Kubernetes Birthday Party Montreal⎈",
+  "url": "https://community.cncf.io/events/details/cncf-montreal-presents-kubernetes-birthday-party-montreal/",
+  "venue_address": "425 Avenue Viger Ouest, 11th floor",
+  "venue_city": "Montréal",
+  "venue_name": "Google Montreal",
+  "venue_zip_code": "H2Z 1W5"
+}

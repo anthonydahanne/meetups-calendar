@@ -14,7 +14,7 @@ public class MeetupClient {
 
     private static final Logger LOG = LoggerFactory.getLogger(MeetupClient.class);
     private final RestClient restClient;
-    private final String MEETUP_API_BASE_URL = "https://api.meetup.com";
+    private static final String MEETUP_API_BASE_URL = "https://api.meetup.com";
 
     public MeetupClient() {
         restClient = RestClient.create();
