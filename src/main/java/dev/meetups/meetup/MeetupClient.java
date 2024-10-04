@@ -34,7 +34,7 @@ public class MeetupClient {
                 .uri(MEETUP_API_BASE_URL + "/" + meetupId + "/events" + status )
                 .retrieve()
                 .body(MeetupEvent[].class));
-        LOG.info("Successfully retrieved " + result.size() + " events for meetup " + meetupId);
+		LOG.info("Successfully retrieved {} events for meetup {}", result.size(), meetupId);
         return result;
     }
 }

@@ -75,4 +75,15 @@ public class Event {
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id='" + id + '\'' +
+                ", groupName='" + groupName + '\'' +
+                ", name='" + name + '\'' +
+                ", url=" + url +
+                ", dateTime=" + dateTime +
+                '}';
+    }
 }

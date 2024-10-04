@@ -19,8 +19,11 @@ public class EventColoring {
 			case String g when g.contains("ai") -> "darkslateblue";
 			case String g when g.contains("python") -> "limegreen";
 			case String g when g.contains("py") -> "limegreen";
-			case String g when g.contains("linux") -> "palegoldenrod";
+			case String g when g.contains("linux") -> "sandybrown";
 			case String g when g.contains("unity") -> "slategrey";
+			case String g when g.contains("laravel") -> "darkorchid";
+			case String g when g.contains("php") -> "darkorchid";
+			case String g when g.contains("craft") -> "plum";
 			default -> "grey";
 		};
 	}
