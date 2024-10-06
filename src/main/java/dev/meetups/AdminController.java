@@ -59,7 +59,7 @@ public class AdminController {
 		Map<String, List<Event>> eventsByGroupNameAndDateTime =
 				Streamable.of(eventRepository.findAll())
 						.stream()
-						.collect(Collectors.groupingBy(event -> event.getGroupName() + "_" + event.getDateTime().toString()));
+						.collect(Collectors.groupingBy(event -> event.getGroupName() + "_" + event.getDateTime().toLocalDate().toString()));
 
 		eventsByGroupNameAndDateTime.values().forEach(events -> {
 			if (events.size() > 1) {
