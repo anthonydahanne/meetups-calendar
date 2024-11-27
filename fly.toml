@@ -24,7 +24,7 @@ primary_region = 'yul'
 
 
 [build]
-builder = "paketobuildpacks/builder-jammy-tiny"
+builder = "paketobuildpacks/builder-jammy-java-tiny"
 #buildpacks = ["gcr.io/paketo-buildpacks/java"]
 
 
