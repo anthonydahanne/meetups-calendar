@@ -7,8 +7,8 @@ app = 'meetups-calendar'
 primary_region = 'yul'
 
 [env]
-  JAVA_OPTS = "-Xmx250M -XX:MaxMetaspaceSize=50M -XX:ReservedCodeCacheSize=50M"
-  BPL_JVM_THREAD_COUNT = 25
+#  JAVA_OPTS = "-Xmx250M -XX:MaxMetaspaceSize=50M -XX:ReservedCodeCacheSize=50M"
+#  BPL_JVM_THREAD_COUNT = 25
 
 [http_service]
   internal_port = 8080
@@ -24,15 +24,15 @@ primary_region = 'yul'
 
 
 [build]
-builder = "paketobuildpacks/builder-jammy-java-tiny"
-#buildpacks = ["gcr.io/paketo-buildpacks/java"]
+builder = "paketobuildpacks/builder-jammy-buildpackless-tiny"
+buildpacks = ["gcr.io/paketo-buildpacks/java-native-image"]
 
 
 [build.args]
-#BP_NATIVE_IMAGE="true"
-BP_JVM_CDS_ENABLED="true"
+BP_NATIVE_IMAGE="true"
+#BP_JVM_CDS_ENABLED="true"
 #BP_SPRING_AOT_ENABLED="true"
 BP_JVM_VERSION="21"
 #JAVA_TOOL_OPTIONS='-XX:ActiveProcessorCount=-1'
-CDS_TRAINING_JAVA_TOOL_OPTIONS="-Dspring.jpa.hibernate.ddl-auto=none -Dhibernate.dialect=org.hibernate.dialect.PostgreSQLDialect"
-#BP_GRADLE_BUILD_ARGUMENTS="--no-daemon -Dorg.gradle.welcome=never -x collectReachabilityMetadata assemble"
+#CDS_TRAINING_JAVA_TOOL_OPTIONS="-Dspring.jpa.hibernate.ddl-auto=none -Dhibernate.dialect=org.hibernate.dialect.PostgreSQLDialect"
+BP_GRADLE_BUILD_ARGUMENTS="--no-daemon -Dorg.gradle.welcome=never -x collectReachabilityMetadata assemble"
