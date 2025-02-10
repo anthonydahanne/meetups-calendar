@@ -7,7 +7,7 @@ app = 'meetups-calendar'
 primary_region = 'yul'
 
 [env]
-  JAVA_OPTS = "-Xmx250M -XX:MaxMetaspaceSize=50M -XX:ReservedCodeCacheSize=50M"
+  JAVA_OPTS = "-Xmx200M -XX:MaxMetaspaceSize=50M -XX:ReservedCodeCacheSize=50M"
   BPL_JVM_THREAD_COUNT = 25
 
 [http_service]
