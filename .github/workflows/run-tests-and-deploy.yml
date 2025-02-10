@@ -27,7 +27,7 @@ jobs:
       - name: Assemble with Gradle
         run: ./gradlew assemble
       - name: Test with Gradle
-        run: ./gradlew test -x processTestAot
+        run: ./gradlew test
       - name: Store reports
         if: failure()
         uses: actions/upload-artifact@v3
