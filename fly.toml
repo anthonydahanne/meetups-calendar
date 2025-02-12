@@ -6,10 +6,6 @@
 app = 'meetups-calendar'
 primary_region = 'yul'
 
-[env]
-  JAVA_OPTS = "-Xmx200M -XX:MaxMetaspaceSize=50M -XX:ReservedCodeCacheSize=50M"
-  BPL_JVM_THREAD_COUNT = 25
-
 [http_service]
   internal_port = 8080
   force_https = true
@@ -24,15 +20,10 @@ primary_region = 'yul'
 
 
 [build]
-builder = "paketobuildpacks/builder-jammy-java-tiny"
-#buildpacks = ["gcr.io/paketo-buildpacks/java"]
+builder = "paketobuildpacks/builder-noble-java-tiny"
+buildpacks = ["urn:cnb:builder:paketo-buildpacks/procfile"]
 
 
 [build.args]
-#BP_NATIVE_IMAGE="true"
-BP_JVM_CDS_ENABLED="true"
-#BP_SPRING_AOT_ENABLED="true"
-BP_JVM_VERSION="21"
-#JAVA_TOOL_OPTIONS='-XX:ActiveProcessorCount=-1'
-CDS_TRAINING_JAVA_TOOL_OPTIONS="-Dspring.jpa.hibernate.ddl-auto=none -Dhibernate.dialect=org.hibernate.dialect.PostgreSQLDialect"
-#BP_GRADLE_BUILD_ARGUMENTS="--no-daemon -Dorg.gradle.welcome=never -x collectReachabilityMetadata assemble"
+BP_DIRECT_PROCESS="true"
+BP_PROCFILE_DEFAULT_PROCESS="./meetups-calendar"
