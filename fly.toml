@@ -16,7 +16,7 @@ primary_region = 'yul'
   processes = ['app']
 
 [[vm]]
-  size = 'shared-cpu-2x'
+  size = 'shared-cpu-1x'
 
 
 [build]
