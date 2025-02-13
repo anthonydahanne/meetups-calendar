@@ -2,7 +2,7 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "native-testing" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
