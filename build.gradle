@@ -13,6 +13,10 @@ repositories {
 	mavenCentral()
 }
 
+jar {
+	enabled = false
+}
+
 base {
 	archivesName = 'meetups-calendar'
 }
