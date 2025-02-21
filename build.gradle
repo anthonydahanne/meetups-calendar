@@ -43,6 +43,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 
+	implementation("com.google.cloud:spring-cloud-gcp-starter-sql-postgresql:6.0.0")
+
 	implementation(platform(SpringBootPlugin.BOM_COORDINATES))
 
 	implementation('net.sf.biweekly:biweekly:0.6.8')
