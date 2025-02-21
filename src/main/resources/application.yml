@@ -10,7 +10,8 @@ management:
     web:
       exposure:
         include: "*"
-    enabled-by-default: true
+    access:
+      default: read_only
   endpoint:
     health:
       show-details: always
@@ -89,4 +90,5 @@ groups:
       - laravel-montreal
       - yuldev
       - html5mtl
+      - montreal-zero-to-deployed
 
