@@ -30,6 +30,7 @@ public class MeetupClient {
     }
 
     private List<MeetupEvent> retrieveMeetupEvents(String meetupId, String status) {
+        LOG.info("Trying to retrieve for meetup {}", meetupId);
         List<MeetupEvent> result = Arrays.asList(restClient.get()
                 .uri(MEETUP_API_BASE_URL + "/" + meetupId + "/events" + status )
                 .retrieve()
