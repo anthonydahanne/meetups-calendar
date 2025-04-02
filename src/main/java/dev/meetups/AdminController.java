@@ -1,6 +1,7 @@
 package dev.meetups;
 
 import dev.meetups.model.Event;
+import dev.meetups.model.When;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.util.Streamable;
@@ -15,8 +16,8 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
-import static dev.meetups.AdminController.When.PAST;
-import static dev.meetups.AdminController.When.UPCOMING;
+import static dev.meetups.model.When.PAST;
+import static dev.meetups.model.When.UPCOMING;
 
 @RestController
 @RequestMapping("/admin")
@@ -37,12 +38,11 @@ public class AdminController {
 	@PutMapping(path = "/refresh/{when}", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public void refreshDb(@PathVariable(value = "when", required = false) When when) {
+		LOG.info("Fetching " + when + " events and saving them in DB");
 		if (when.equals(PAST)) {
-			LOG.info("Fetching past events and saving them in DB");
-			fetchEvents.retrieveAndSaveMeetupPastEvents(groupsIds.meetup);
+			fetchEvents.retrieveAndSaveMeetupEvents(groupsIds.meetup, PAST);
 		} else if (when.equals(UPCOMING)) {
-			LOG.info("Fetching present and future events and saving them in DB");
-			fetchEvents.retrieveAndSaveMeetupFutureEvents(groupsIds.meetup);
+			fetchEvents.retrieveAndSaveMeetupEvents(groupsIds.meetup, UPCOMING);
 		}
 	}
 
@@ -99,11 +99,6 @@ public class AdminController {
 
 
 	static class HttpErrorException extends Exception {
-	}
-
-	enum When {
-		PAST,
-		UPCOMING
 	}
 
 }

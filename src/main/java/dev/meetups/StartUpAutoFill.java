@@ -7,6 +7,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import static dev.meetups.model.When.PAST;
+
 @Component
 public class StartUpAutoFill {
 
@@ -30,8 +32,8 @@ public class StartUpAutoFill {
 			LOG.info("Database already created; skipping init");
 		} else if (autoFill) {
 			LOG.info("Fetching past events and saving them in DB");
-			fetchEvents.retrieveAndSaveCncfPastEvents(groupsIds.cncf);
-			fetchEvents.retrieveAndSaveMeetupPastEvents(groupsIds.meetup);
+			fetchEvents.retrieveAndSaveCncfEvents(groupsIds.cncf, PAST);
+			fetchEvents.retrieveAndSaveMeetupEvents(groupsIds.meetup, PAST);
 		}
 	}
 }

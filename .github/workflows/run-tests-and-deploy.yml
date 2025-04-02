@@ -23,6 +23,8 @@ jobs:
           java-version: '21'
       - name: Assemble with Gradle
         run: ./gradlew assemble
+        env:
+          FULLCALENDAR_FORK_READ_ONLY_PACKAGES: ${{ secrets.FULLCALENDAR_FORK_READ_ONLY_PACKAGES }}
       - name: Test with Gradle
         run: ./gradlew -x processTestAot test
       - name: Store reports
@@ -35,7 +37,6 @@ jobs:
             **/build/test-results/
       - name: Native build with Gradle
         run: ./gradlew nativeCompile
-
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy image
         run: cp fly.toml build/native/nativeCompile/ && cd build/native/nativeCompile/ && flyctl deploy

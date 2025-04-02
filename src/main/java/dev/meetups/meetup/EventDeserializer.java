@@ -11,7 +11,7 @@ import dev.meetups.meetup.model.MeetupEvent;
 import java.io.IOException;
 import java.time.Instant;
 
-public class EventDeserializer extends JsonDeserializer {
+public class EventDeserializer extends JsonDeserializer<MeetupEvent> {
 
     @Override
     public MeetupEvent deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
