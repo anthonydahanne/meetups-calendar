@@ -11,14 +11,15 @@ plugins {
 
 repositories {
 	mavenCentral()
-	maven {
-		// This maven repo is for my fork of fullcalendar, waiting for the next release
-		url = uri("https://maven.pkg.github.com/anthonydahanne/fullcalendar")
-		credentials {
-			username = "anthonydahanne"
-			password = System.getenv("FULLCALENDAR_FORK_READ_ONLY_PACKAGES")
-		}
-	}}
+//	maven {
+//		// This maven repo is for my fork of fullcalendar, waiting for the next release
+//		url = uri("https://maven.pkg.github.com/anthonydahanne/fullcalendar")
+//		credentials {
+//			username = "anthonydahanne"
+//			password = System.getenv("FULLCALENDAR_FORK_READ_ONLY_PACKAGES")
+//		}
+//	}
+}
 
 base {
 	archivesName = 'meetups-calendar'
@@ -50,7 +51,7 @@ dependencies {
 	implementation(platform(SpringBootPlugin.BOM_COORDINATES))
 
 	implementation('net.sf.biweekly:biweekly:0.6.8')
-	implementation('anthonydahanne.org.webjars:fullcalendar:6.1.10')
+	implementation('org.webjars:fullcalendar:6.1.10')
 	implementation('org.webjars:webjars-locator-lite')
 
 	runtimeOnly 'org.postgresql:postgresql'
