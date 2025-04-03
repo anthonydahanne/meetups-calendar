@@ -2,6 +2,7 @@ package dev.meetups;
 
 import dev.meetups.cncf.model.CncfEvent;
 import dev.meetups.cncf.model.CncfResult;
+import dev.meetups.meetup.MeetupGraphQLClient;
 import dev.meetups.meetup.model.Group;
 import dev.meetups.meetup.model.MeetupEvent;
 import dev.meetups.meetup.model.Venue;
@@ -18,7 +19,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 @SpringBootApplication
 @EnableScheduling
 @Configuration
-@RegisterReflectionForBinding({MeetupEvent.class, Group.class, Venue.class, Event.class, CncfEvent.class, CncfResult.class })
+@RegisterReflectionForBinding({
+		MeetupEvent.class, Group.class, Venue.class, Event.class, CncfEvent.class, CncfResult.class,
+		MeetupGraphQLClient.Input.class, MeetupGraphQLClient.GroupWithEvents.class, MeetupGraphQLClient.Node.class, MeetupGraphQLClient.Edge.class, MeetupGraphQLClient.EventSearch.class})
 public class CalendarApiApplication  implements RepositoryRestConfigurer {
 
 	public static void main(String[] args) {

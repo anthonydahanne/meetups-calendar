@@ -82,58 +82,7 @@ public class MeetupGraphQLClient {
 		return meetupEvents;
 	}
 
-//	public List<MeetupEvent> retrieveAllPastEvents(String meetupId) {
-//		var meetupEvents = new ArrayList<MeetupEvent>();
-//		String document =
-//				"""
-//						query GetMeetupEvents($groupName: String!, $input: ConnectionInput!, $filter: ___filter___, $sortOrder: SortOrder) {
-//						      groupByUrlname(urlname: $groupName) {
-//						        id
-//						        name
-//						        urlname
-//						        pastEvents(input: $input, filter: $filter, sortOrder: $sortOrder) {
-//						          edges {
-//						            node {
-//						              id
-//						              title
-//						              dateTime
-//						              venue {
-//						                name
-//						                address
-//						              }
-//						              eventUrl
-//						              description
-//						            }
-//						          }
-//						          pageInfo {
-//						            hasNextPage
-//						            endCursor
-//						          }
-//						        }
-//						      }
-//						    }
-//				""".replace("___filter___", "GroupPastEventsFilter");
-//
-//		GroupWithPastEvents groupWithPastEvents = graphQlClient.document(document)
-//				.variable("groupName", meetupId)
-//				.variable("sortOrder", "ASC")
-//				.variable("input", new Input(1000L, null))
-//				.retrieveSync("groupByUrlname")
-//				.toEntity(GroupWithPastEvents.class);
-//
-//
-//		Group group = new Group(groupWithPastEvents.name(), Long.valueOf(groupWithPastEvents.id()), groupWithPastEvents.urlname());
-//
-//		groupWithPastEvents.pastEvents().edges().forEach(edge -> {
-//		LocalDateTime eventTime = LocalDateTime.parse(edge.node().dateTime(), DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-//			long epochSecond = eventTime.toEpochSecond(ZoneOffset.of("-04:00"));
-//			meetupEvents.add(new MeetupEvent(-1L, edge.node().id(), edge.node().title(), -1, epochSecond * 1000,edge.node().venue(), edge.node().eventUrl(), group));
-//		});
-//		return meetupEvents;
-//	}
-
 	public record Input(Long first, Long after) {}
-//	public record GroupWithPastEvents(String id, String name, String urlname, EventSearch pastEvents) { }
 	public record GroupWithEvents(String id, String name, String urlname, EventSearch upcomingEvents, EventSearch pastEvents){}
 	public record Node(String id, String title, String dateTime, Venue venue, String description, String eventUrl) { }
 	public record Edge(Node node) { }
