@@ -34,6 +34,7 @@ public class StartUpAutoFill {
 			LOG.info("Fetching past events and saving them in DB");
 			fetchEvents.retrieveAndSaveCncfEvents(groupsIds.cncf, PAST);
 			fetchEvents.retrieveAndSaveMeetupEvents(groupsIds.meetup, PAST);
+			fetchEvents.retrieveAndSaveGuildEvents(groupsIds.guild, PAST);
 		}
 	}
 }

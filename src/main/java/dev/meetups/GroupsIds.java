@@ -12,6 +12,7 @@ public class GroupsIds {
 
     Map<String, List<String>> meetup;
     Map<String, List<String>> cncf;
+    Map<String, List<String>> guild;
 
     public Map<String, List<String>> getMeetup() {
         return meetup;
@@ -27,6 +28,14 @@ public class GroupsIds {
 
     public void setCncf(Map<String, List<String>> cncf) {
         this.cncf = cncf;
+    }
+
+    public Map<String, List<String>> getGuild() {
+        return guild;
+    }
+
+    public void setGuild(Map<String, List<String>> guild) {
+        this.guild = guild;
     }
 
 }

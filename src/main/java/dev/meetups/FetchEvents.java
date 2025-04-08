@@ -2,6 +2,8 @@ package dev.meetups;
 
 import dev.meetups.cncf.CncfClient;
 import dev.meetups.cncf.model.CncfEvent;
+import dev.meetups.guild.GuildClient;
+import dev.meetups.guild.model.GuildEvent;
 import dev.meetups.meetup.MeetupGraphQLClient;
 import dev.meetups.meetup.model.MeetupEvent;
 import dev.meetups.model.Event;
@@ -27,11 +29,13 @@ public class FetchEvents {
 
 	MeetupGraphQLClient meetupClient;
 	CncfClient cncfClient;
+	GuildClient guildClient;
 	EventRepository eventRepository;
 
-	public FetchEvents(MeetupGraphQLClient meetupClient, CncfClient cncfClient, EventRepository eventRepository) {
+	public FetchEvents(MeetupGraphQLClient meetupClient, CncfClient cncfClient, GuildClient guildClient, EventRepository eventRepository) {
 		this.meetupClient = meetupClient;
 		this.cncfClient = cncfClient;
+		this.guildClient = guildClient;
 		this.eventRepository = eventRepository;
 	}
 
@@ -40,7 +44,7 @@ public class FetchEvents {
 				.flatMap(Collection::stream)
 				.forEach(meetupId -> {
 					List<MeetupEvent> meetupEvents = meetupClient.retrieveAllEvents(meetupId, when);
-					LOG.info("Retrieved " + meetupEvents.size() + " events for " + meetupId);
+                    LOG.info("Retrieved {} Meetup.com events for {}", meetupEvents.size(), meetupId);
 					meetupEvents.forEach(meetupEvent -> {
 						try {
 							Event standardEvent = meetupEventToStandardEvent(meetupEvent);
@@ -57,10 +61,27 @@ public class FetchEvents {
 				.flatMap(Collection::stream)
 				.forEach(cncfMeetupId -> {
 					List<CncfEvent> cncfEvents = cncfClient.retrieveAllEvents(cncfMeetupId, when);
-					LOG.info("Retrieved " + cncfEvents.size() + " events for " + cncfMeetupId);
+					LOG.info("Retrieved {} CNCF events for {}", cncfEvents.size(), cncfMeetupId);
 					cncfEvents.forEach(cncfEvent -> {
 						try {
 							Event standardEvent = cncfEventToStandardEvent(cncfEvent);
+							eventRepository.save(standardEvent);
+						} catch (MalformedURLException | URISyntaxException e) {
+							throw new RuntimeException(e);
+						}
+					});
+				});
+	}
+
+	public void retrieveAndSaveGuildEvents(Map<String, List<String>> guildIds, When when) {
+		guildIds.values().stream()
+				.flatMap(Collection::stream)
+				.forEach(guildId -> {
+					List<GuildEvent> guildEvents = guildClient.retrieveAllEvents(guildId, when);
+					LOG.info("Retrieved {} Guild events for {}", guildEvents.size(), guildId);
+					guildEvents.forEach(guildEvent -> {
+						try {
+							Event standardEvent = guildEventToStandardEvent(guildEvent, guildId);
 							eventRepository.save(standardEvent);
 						} catch (MalformedURLException | URISyntaxException e) {
 							throw new RuntimeException(e);
@@ -75,8 +96,11 @@ public class FetchEvents {
 	}
 
 	private Event cncfEventToStandardEvent(CncfEvent cncfEvent) throws MalformedURLException, URISyntaxException {
-		long eventId = Long.parseLong(cncfEvent.originalEventId());
-		return new Event("c" + eventId,  cncfEvent.chapterTitle(), cncfEvent.title(), new URI(cncfEvent.url()).toURL(), cncfEvent.startDate());
+		return new Event("c" + cncfEvent.originalEventId(),  cncfEvent.chapterTitle(), cncfEvent.title(), new URI(cncfEvent.url()).toURL(), cncfEvent.startDate());
+	}
+
+	private Event guildEventToStandardEvent(GuildEvent guildEvent, String guildId) throws MalformedURLException, URISyntaxException {
+		return new Event("g" + guildEvent.slug(), guildId , guildEvent.title(), new URI(guildEvent.fullUrl()).toURL(), guildEvent.startAt());
 	}
 
 }

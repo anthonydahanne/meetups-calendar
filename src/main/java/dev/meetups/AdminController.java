@@ -43,8 +43,13 @@ public class AdminController {
 		LOG.info("Fetching " + when + " events and saving them in DB");
 		if (when.equals(PAST)) {
 			fetchEvents.retrieveAndSaveMeetupEvents(groupsIds.meetup, PAST);
+			fetchEvents.retrieveAndSaveCncfEvents(groupsIds.cncf, PAST);
+			fetchEvents.retrieveAndSaveGuildEvents(groupsIds.guild, PAST);
+
 		} else if (when.equals(UPCOMING)) {
 			fetchEvents.retrieveAndSaveMeetupEvents(groupsIds.meetup, UPCOMING);
+			fetchEvents.retrieveAndSaveCncfEvents(groupsIds.cncf, UPCOMING);
+			fetchEvents.retrieveAndSaveGuildEvents(groupsIds.guild, UPCOMING);
 		}
 	}
 

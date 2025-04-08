@@ -57,10 +57,22 @@ autofill: false
 adminPassword: overridden
 
 groups:
+  guild:
+# I wish I could just put the network id montreal-tech in lieu of each individaul group, but the API does not have a way to return the name of individual meetups from a network
+    montreal:
+      - react-montreal
+      - software-crafters-montreal
+      - devops-montreal
+      - typescript-montreal
+      - elixir-montreal
+      - php-montreal
+# those below did not do the switch to guild yet, almost no members there
+#      - troisw-quebec
+#      - montr-al-aws-user-group
+#      - montreal-python
   cncf:
     montreal:
       - 180
-
   meetup:
     montreal:
       - montreal-jug
