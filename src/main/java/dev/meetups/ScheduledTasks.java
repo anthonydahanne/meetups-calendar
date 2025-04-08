@@ -26,5 +26,6 @@ public class ScheduledTasks {
 		LOG.info("Fetching present and future events and saving them in DB");
 		fetchEvents.retrieveAndSaveCncfEvents(groupsIds.cncf, UPCOMING);
 		fetchEvents.retrieveAndSaveMeetupEvents(groupsIds.meetup, UPCOMING);
+		fetchEvents.retrieveAndSaveGuildEvents(groupsIds.meetup, UPCOMING);
 	}
 }

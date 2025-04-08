@@ -62,7 +62,7 @@ public class AdminController {
 	@DeleteMapping(path = "/cleanDuplicates", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
 	public void clean() {
-
+		LOG.info("Clean method called, removing duplicates and invalid (404 URLs) events");
 		Map<String, List<Event>> eventsByGroupNameAndDateTime =
 				Streamable.of(eventRepository.findAll())
 						.stream()
@@ -103,7 +103,7 @@ public class AdminController {
 		events.remove(eventToKeep);
 
 		events.forEach(entity -> {
-			LOG.warn("Removing this non valid and duplicate event: {}", entity);
+			LOG.warn("Removing this duplicate event: {}", entity);
 			eventRepository.delete(entity);
 		});
 	}
@@ -116,6 +116,7 @@ public class AdminController {
 					.retrieve()
 					.toEntity(String.class);
 		} catch (Exception e) {
+			LOG.warn("Failed to issue this request: {} because of {}", event.getUrl(), e.getMessage());
 			return false;
 		}
 		return result.getStatusCode().is2xxSuccessful();
