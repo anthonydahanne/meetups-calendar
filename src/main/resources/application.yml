@@ -76,7 +76,6 @@ groups:
   meetup:
     montreal:
       - montreal-jug
-      - typescript-montreal
       - fluttermontreal
 #      - lets-code-eat-and-have-fun
 #      - montreal-data-and-ai
@@ -88,7 +87,6 @@ groups:
       - linux-montreal
       - golangmontreal
       - google-cloud-platform-meetup-montreal
-      - software-crafters-montreal
       - Meetup-DevOps-Montreal
       - linux-montreal
       - Montreal-AWS-Users-United
